@@ -1172,16 +1172,16 @@
     const fmtRupiah = (n) => "Rp" + Number(n).toLocaleString("id-ID");
     const fleetGrid = document.getElementById("fleetGrid");
 
-    async function loadFleet() {
+async function loadFleet() {
   try {
     const response = await fetch(`${API_BASE}/vehicles`);
     const result = await response.json();
 
-    if (!result.success) {
-      throw new Error(result.message || "API error");
+    if (!result || !result.data) {
+      throw new Error("Format response API tidak valid");
     }
 
-    cars = result.data || [];
+    cars = result.data;
     renderFleet("Semua");
 
   } catch (err) {
