@@ -1173,16 +1173,15 @@
     const fleetGrid = document.getElementById("fleetGrid");
 
     async function loadFleet() {
-  const response = await fetch(`${API_BASE}/vehicles`);
-  const result = await response.json();
+  try {
+    const response = await fetch(`${API_BASE}/vehicles`);
+    const result = await response.json();
 
-  const fleetData = result.data;
+    if (!result.success) {
+      throw new Error(result.message || "API error");
+    }
 
-  cars = fleetData;
-  renderFleet("Semua");
-}
-
-    cars = fleetData;
+    cars = result.data || [];
     renderFleet("Semua");
 
   } catch (err) {
