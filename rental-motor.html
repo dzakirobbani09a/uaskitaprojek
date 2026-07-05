@@ -1187,7 +1187,7 @@
     // (tidak ada fetch() sama sekali) -- makanya data booking dari halaman ini tidak
     // pernah masuk ke MySQL. Sekarang kendaraan diambil dari GET /api/vehicles dan
     // submit modal benar-benar POST ke /api/rentals.
-    const API_BASE = '/api';
+    const API_BASE = 'https://uaskitaprojek-backend-production.up.railway.app/api';
     let cars = [];
     const fmtRupiah = (n) => "Rp" + Number(n).toLocaleString("id-ID");
     const fleetGrid = document.getElementById("fleetGrid");
