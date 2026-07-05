@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FURAB RENTAL</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Segoe UI, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #3b82f6, #9333ea);
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(12px);
+        }
+
+        header h1 { color: white; font-size: 22px; }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        nav a:hover { color: #ffd54f; }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 90px;
+        }
+
+        .card {
+            width: 420px;
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+            animation: muncul .7s ease;
+        }
+
+        @keyframes muncul {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card h2 {
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .card p.sub {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            transition: .3s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 10px rgba(37, 99, 235, .3);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 30px;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #2563eb, #7c3aed);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+        }
+
+        button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .info {
+            background: #eef4ff;
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: #444;
+            font-size: 14px;
+            display: none;
+        }
+
+        .info.show { display: block; }
+        .info.error { background: #fdecea; color: #b3261e; }
+        .info.success { background: #e6f7ec; color: #1e7e34; }
+
+        .switch-link {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .switch-link a { color: #2563eb; font-weight: 600; text-decoration: none; }
+
+        @media(max-width:600px) {
+            header { padding: 15px; flex-direction: column; }
+            .card { width: 92%; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>FURAB RENTAL</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="register.html">Daftar</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Masuk</h2>
+            <p class="sub">Login untuk admin &amp; staff FURAB RENTAL</p>
+
+            <div class="info" id="infoBox"></div>
+
+            <form id="formLogin">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="nama@contoh.com">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Minimal 6 karakter" minlength="6">
+
+                <button type="submit" id="btnSubmit">Login</button>
+            </form>
+
+            <p class="switch-link">Belum punya akun? <a href="register.html">Daftar di sini</a></p>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        const API_BASE = "/api";
+        const form = document.getElementById("formLogin");
+        const infoBox = document.getElementById("infoBox");
+        const btnSubmit = document.getElementById("btnSubmit");
+
+        // Kalau sudah login, langsung lempar ke halaman utama.
+        if (Auth.isLoggedIn()) {
+            window.location.href = "index.html";
+        }
+
+        function showInfo(message, type) {
+            infoBox.textContent = message;
+            infoBox.className = `info show ${type}`;
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            infoBox.className = "info";
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = "Memproses...";
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ email, password }),
+                });
+                const json = await res.json();
+
+                if (!res.ok || !json.success) {
+                    throw new Error(json.message || "Login gagal.");
+                }
+
+                Auth.saveSession(json.token, json.user);
+                showInfo("Login berhasil! Mengalihkan...", "success");
+                setTimeout(() => (window.location.href = "index.html"), 600);
+            } catch (err) {
+                showInfo(err.message, "error");
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = "Login";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

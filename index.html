@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURAB RENTAL MEDAN</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h2>FURAB RENTAL</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+
+                    <a href="#" id="kendaraanBtn">
+                        Kendaraan <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+
+                    <ul class="dropdown-menu" id="kendaraanMenu">
+
+                        <li><a href="rental-mobil.html">Mobil</a></li>
+                        <li><a href="rental-motor.html">Sepeda Motor</a></li>
+
+                    </ul>
+
+                </li>
+                <ul>
+                    <li id="authSlot"></li>
+                </ul>
+            </ul>
+        </nav>
+
+        <div class="hero">
+
+            <div class="hero-text">
+
+                <h1>Sewa Kendaraan Dengan Mudah & Aman</h1>
+
+                <p>
+                    Nikmati pengalaman menyewa mobil dan motor terbaik
+                    dengan harga terjangkau, armada terbaru,
+                    serta pelayanan profesional.
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <section class="judul">
+
+        <h2>Armada Terpopuler</h2>
+
+        <p>Pilih kendaraan favoritmu</p>
+
+    </section>
+
+    <section class="cars">
+
+        <div class="card">
+
+            <img src="foto/toyota avanza.jpg">
+            <h3>Toyota Avanza</h3>
+            <p>Rp 350.000 / Hari</p>
+        </div>
+
+        <div class="card">
+
+            <img src="foto/brio3.jpg">
+            <h3>Honda Brio</h3>
+            <p>Rp 300.000 / Hari</p>
+
+        </div>
+        <div class="card">
+
+            <img src="foto/toyota fortuner.jpg">
+            <h3>Fortuner</h3>
+            <p>Rp 500.000 / Hari</p>
+        </div>
+        <div class="card">
+
+            <img src="foto/daihatsu pajero sport.jpg">
+            <h3>Mitsubishi Pajero</h3>
+            <p>Rp 1jt / Hari</p>
+        </div>
+        <div class="card">
+            <img src="foto/toyota agya.jpg">
+            <h3>toyota agya</h3>
+            <p>Rp 250.000 / Hari</p>
+        </div>
+        <div class="card">
+
+            <img src="foto/toyota rush.jpg">
+            <h3>toyota rush</h3>
+            <p>Rp 450.000 / Hari</p>
+        </div>
+    </section>
+
+    <section class="why">
+
+        <h2>Mengapa Memilih Kami?</h2>
+        <div class="box">
+            <div>
+                <i class="fa-solid fa-car"></i>
+
+                <h3>Armada Baru</h3>
+
+                <p>Seluruh kendaraan selalu dirawat secara berkala.</p>
+
+            </div>
+
+            <div>
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+                <h3>Harga Murah</h3>
+
+                <p>Harga bersaing dengan kualitas terbaik.</p>
+
+            </div>
+
+            <div>
+
+                <i class="fa-solid fa-headset"></i>
+
+                <h3>24 Jam</h3>
+
+                <p>Customer Service siap membantu kapan saja.</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        <h3>FURAB RENTAL MEDAN</h3>
+        <p>Rental Mobil & Motor Terpercaya</p>
+        <p>© 2026 All Rights Reserved</p>
+
+    </footer>
+    <script src="js/auth.js"></script>
+    <script>
+
+        const btn = document.getElementById("kendaraanBtn");
+        const menu = document.getElementById("kendaraanMenu");
+
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            menu.classList.toggle("show");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove("show");
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Penyewaan</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Segoe UI, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #3b82f6, #9333ea);
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(12px);
+        }
+
+        header h1 {
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #ffd54f;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 90px;
+        }
+
+        .card {
+            width: 520px;
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+            animation: muncul .7s ease;
+        }
+
+        @keyframes muncul {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card h2 {
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            transition: .3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 10px rgba(37, 99, 235, .3);
+        }
+
+        select:disabled {
+            background: #f2f2f2;
+            color: #888;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 30px;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #2563eb, #7c3aed);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+        }
+
+        button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .info {
+            background: #eef4ff;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .info.error {
+            background: #fdecea;
+            color: #b3261e;
+        }
+
+        .price-preview {
+            margin-top: 14px;
+            background: #f4f0ff;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #2563eb;
+            display: none;
+        }
+
+        .field-error {
+            color: #b3261e;
+            font-size: 13px;
+            margin-top: 4px;
+            min-height: 16px;
+        }
+
+        @media(max-width:600px) {
+            header {
+                padding: 15px;
+                flex-direction: column;
+            }
+
+            .card {
+                width: 95%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Rental Kendaraan</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="riwayat.html">Riwayat</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Form Penyewaan Kendaraan</h2>
+
+            <div class="info" id="infoBox">
+                Silakan isi seluruh data dengan benar sebelum melanjutkan ke proses pembayaran.
+            </div>
+
+            <form id="formSewa">
+
+                <label>Pilih Kendaraan</label>
+                <select id="vehicle" required disabled>
+                    <option value="">Memuat daftar kendaraan...</option>
+                </select>
+                <div class="field-error" id="err-vehicle"></div>
+
+                <label>Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+                <div class="field-error" id="err-nama"></div>
+
+                <label>No. WhatsApp / Telepon</label>
+                <input type="tel" id="hp" placeholder="08xxxxxxxxxx" required>
+                <div class="field-error" id="err-hp"></div>
+
+                <label>Tanggal Ambil</label>
+                <input type="date" id="tgl" required>
+
+                <label>Tanggal Kembali</label>
+                <input type="date" id="kembali" required>
+                <div class="field-error" id="err-tanggal"></div>
+
+                <label style="display:flex;align-items:center;gap:8px;margin-top:18px;">
+                    <input type="checkbox" id="withDriver" style="width:auto;">
+                    Sewa dengan sopir (+Rp150.000/hari)
+                </label>
+
+                <div class="price-preview" id="pricePreview"></div>
+
+                <button type="submit" id="btnSubmit">
+                    💳 Lanjut ke Pembayaran
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '/api';
+
+        const vehicleSelect = document.getElementById('vehicle');
+        const tgl = document.getElementById('tgl');
+        const kembali = document.getElementById('kembali');
+        const withDriver = document.getElementById('withDriver');
+        const pricePreview = document.getElementById('pricePreview');
+        const infoBox = document.getElementById('infoBox');
+        const btnSubmit = document.getElementById('btnSubmit');
+
+        let vehicles = [];
+
+        async function loadVehicles() {
+            try {
+                const res = await fetch(`${API_BASE}/vehicles?limit=100&status=Tersedia`);
+                const json = await res.json();
+
+                if (!res.ok || !json.success) throw new Error(json.message || 'Gagal memuat kendaraan');
+
+                vehicles = json.data;
+
+                if (vehicles.length === 0) {
+                    vehicleSelect.innerHTML = '<option value="">Belum ada kendaraan tersedia</option>';
+                    return;
+                }
+
+                vehicleSelect.innerHTML =
+                    '<option value="">-- Pilih Kendaraan --</option>' +
+                    vehicles.map(v => `
+                        <option value="${v.id}">
+                            ${v.name} (${v.type}) - Rp${Number(v.price_per_day).toLocaleString('id-ID')}/hari
+                        </option>
+                    `).join('');
+
+                vehicleSelect.disabled = false;
+            } catch (err) {
+                console.error(err);
+                infoBox.textContent = 'Gagal memuat daftar kendaraan dari server. Pastikan backend berjalan.';
+                infoBox.classList.add('error');
+                vehicleSelect.innerHTML = '<option value="">Gagal memuat data</option>';
+            }
+        }
+
+        function updatePricePreview() {
+            const vehicle = vehicles.find(v => String(v.id) === vehicleSelect.value);
+            if (!vehicle || !tgl.value || !kembali.value) {
+                pricePreview.style.display = 'none';
+                return;
+            }
+
+            const days = Math.ceil((new Date(kembali.value) - new Date(tgl.value)) / 86400000);
+            if (days <= 0) {
+                pricePreview.style.display = 'none';
+                return;
+            }
+
+            const driverFee = withDriver.checked ? days * 150000 : 0;
+            const total = vehicle.price_per_day * days + driverFee;
+
+            pricePreview.style.display = 'block';
+            pricePreview.textContent =
+                `Estimasi total: Rp${total.toLocaleString('id-ID')} (${days} hari${withDriver.checked ? ', dengan sopir' : ''})`;
+        }
+
+        vehicleSelect.addEventListener('change', updatePricePreview);
+        withDriver.addEventListener('change', updatePricePreview);
+
+        tgl.addEventListener('change', () => {
+            kembali.min = tgl.value;
+            updatePricePreview();
+        });
+        kembali.addEventListener('change', updatePricePreview);
+
+        function setError(id, msg) {
+            document.getElementById('err-' + id).textContent = msg || '';
+        }
+
+        document.getElementById('formSewa').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            setError('vehicle', '');
+            setError('nama', '');
+            setError('hp', '');
+            setError('tanggal', '');
+
+            const vehicleId = vehicleSelect.value;
+            const nama = document.getElementById('nama').value.trim();
+            const hp = document.getElementById('hp').value.trim();
+
+            let valid = true;
+            if (!vehicleId) { setError('vehicle', 'Pilih kendaraan terlebih dahulu.'); valid = false; }
+            if (!nama) { setError('nama', 'Nama wajib diisi.'); valid = false; }
+            if (!/^(\+62|62|0)8[1-9][0-9]{6,10}$/.test(hp)) {
+                setError('hp', 'Format nomor HP tidak valid, contoh: 0812xxxxxxx');
+                valid = false;
+            }
+            if (!tgl.value || !kembali.value || kembali.value <= tgl.value) {
+                setError('tanggal', 'Tanggal kembali harus setelah tanggal ambil.');
+                valid = false;
+            }
+            if (!valid) return;
+
+            const payload = {
+                vehicleId: Number(vehicleId),
+                customerName: nama,
+                customerPhone: hp,
+                startDate: tgl.value,
+                endDate: kembali.value,
+                withDriver: withDriver.checked,
+            };
+
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = 'Menyimpan...';
+
+            try {
+             
+                const res = await fetch(`${API_BASE}/rentals`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                const result = await res.json();
+
+                if (!res.ok || !result.success) {
+                    const msg = result.errors
+                        ? result.errors.map(e => e.message).join(', ')
+                        : (result.message || 'Gagal menyimpan data.');
+                    throw new Error(msg);
+                }
+
+                window.location.href = `pembayaran.html?id=${result.data.id}`;
+            } catch (err) {
+                infoBox.textContent = 'Gagal booking: ' + err.message;
+                infoBox.classList.add('error');
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = '💳 Lanjut ke Pembayaran';
+            }
+        });
+
+        loadVehicles();
+    </script>
+
+</body>
+
+</html>

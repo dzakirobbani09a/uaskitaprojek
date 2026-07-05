@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FURAB RENTAL — Sewa Mobil Harian & Lepas Kunci</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #14181F;
+      --paper: #F5F1E8;
+      --paper-2: #EDE7D8;
+      --amber: #E8A33D;
+      --amber-dark: #C97F1E;
+      --teal: #2F6E63;
+      --teal-light: #E4EFEA;
+      --line: #D8D0BB;
+      --white: #FFFFFF;
+      --plate: #1A1A1A;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--amber-dark);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 241, 232, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .site-header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 26px;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .logo .dash {
+      color: var(--amber-dark);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal);
+    }
+
+    .btn {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 14.5px;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 22px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--ink);
+      box-shadow: 0 4px 0 var(--amber-dark);
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 var(--amber-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+    }
+
+    .btn-ghost {
+      background: var(--teal-light);
+      color: var(--teal);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(232, 163, 61, 0.25), transparent 45%),
+        linear-gradient(180deg, var(--ink) 0%, #1F2530 100%);
+      color: var(--paper);
+      padding: 72px 0 130px;
+      overflow: hidden;
+    }
+
+    .road-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 64px;
+      height: 0;
+      border-top: 4px dashed rgba(245, 241, 232, 0.25);
+    }
+
+    .hero .wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow-plate {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--plate);
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 2px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 2px solid #444;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow-plate::before {
+      content: "●";
+      color: var(--amber);
+      font-size: 10px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(42px, 6.5vw, 76px);
+      line-height: 0.98;
+      margin: 0 0 20px;
+      letter-spacing: 0.2px;
+      max-width: 14ch;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--amber);
+    }
+
+    .hero p.lede {
+      font-size: 18px;
+      max-width: 46ch;
+      color: #D8D6CE;
+      margin: 0 0 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .search-card {
+      background: var(--white);
+      color: var(--ink);
+      border-radius: var(--radius);
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr auto;
+      gap: 16px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .search-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .search-field label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #6B6558;
+    }
+
+    .search-field input,
+    .search-field select {
+      font-family: var(--font-body);
+      font-size: 15px;
+      padding: 11px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .search-field input:focus,
+    .search-field select:focus {
+      border-color: var(--teal);
+    }
+
+    .search-card .btn {
+      align-self: end;
+      height: 44px;
+      white-space: nowrap;
+    }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .stats .wrap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 34px 24px;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .stat b {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 40px;
+    }
+
+    .stat span {
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      color: #CFE6DF;
+      text-transform: uppercase;
+    }
+
+    section {
+      padding: 84px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 42px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(30px, 4vw, 44px);
+      margin: 0;
+      line-height: 1.02;
+    }
+
+    .section-head p {
+      max-width: 42ch;
+      color: #514C40;
+      margin: 10px 0 0;
+    }
+
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .filter-pill {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: var(--white);
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    .filter-pill.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    /* ---------- Fleet grid ---------- */
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .car-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .car-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px rgba(20, 24, 31, 0.12);
+    }
+
+    .car-art {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .car-art svg {
+      width: 78%;
+    }
+
+    .car-type-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(20, 24, 31, 0.85);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+
+    .car-body {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .car-body h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .plate-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .plate {
+      font-family: var(--font-mono);
+      background: var(--plate);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1.5px solid #3a3a3a;
+    }
+
+    .car-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .price b {
+      font-family: var(--font-display);
+      font-size: 22px;
+    }
+
+    .price span {
+      display: block;
+      font-size: 11.5px;
+      color: #7A7566;
+    }
+
+    .btn-small {
+      padding: 9px 16px;
+      font-size: 13.5px;
+    }
+
+    /* ---------- How it works ---------- */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .step-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      position: relative;
+    }
+
+    .step-plate {
+      font-family: var(--font-mono);
+      background: var(--plate);
+      color: var(--white);
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .step-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+
+    .step-card p {
+      margin: 0;
+      color: #514C40;
+      font-size: 14.5px;
+    }
+
+    /* ---------- Testimonials ---------- */
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .test-card {
+      background: var(--teal-light);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .test-card p {
+      font-size: 15px;
+      margin: 0 0 16px;
+      color: #233633;
+    }
+
+    .test-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .test-role {
+      font-size: 12.5px;
+      color: #4B655F;
+    }
+
+    .stars {
+      color: var(--amber-dark);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq {
+      max-width: 760px;
+    }
+
+    .faq details {
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 16px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq summary::after {
+      content: "+";
+      font-size: 22px;
+      color: var(--teal);
+      font-weight: 400;
+    }
+
+    .faq details[open] summary::after {
+      content: "–";
+    }
+
+    .faq p {
+      color: #514C40;
+      margin: 12px 0 0;
+      font-size: 14.5px;
+    }
+
+    /* ---------- CTA / Footer ---------- */
+    .cta-band {
+      background: var(--ink);
+      color: var(--paper);
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(30px, 5vw, 50px);
+      margin: 0 0 14px;
+    }
+
+    .cta-band p {
+      color: #B8B4A8;
+      margin: 0 0 28px;
+    }
+
+    .cta-band .btn-primary {
+      padding: 16px 34px;
+      font-size: 16px;
+    }
+
+    footer {
+      background: var(--paper-2);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 32px;
+      padding: 56px 0 30px;
+    }
+
+    .footer-grid h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 14px;
+      color: #6B6558;
+    }
+
+    .footer-grid ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14.5px;
+    }
+
+    .footer-grid ul a {
+      text-decoration: none;
+    }
+
+    .footer-grid ul a:hover {
+      color: var(--teal);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--line);
+      padding: 20px 0;
+      font-size: 13px;
+      color: #7A7566;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ---------- Modal ---------- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 24, 31, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius);
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--paper-2);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .modal h3 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      margin: 0 0 4px;
+    }
+
+    .modal .modal-car-sub {
+      color: #7A7566;
+      font-size: 14px;
+      margin: 0 0 22px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6B6558;
+    }
+
+    .form-group input,
+    .form-group select {
+      font-family: var(--font-body);
+      font-size: 15px;
+      padding: 11px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--line);
+      background: var(--paper);
+    }
+
+    .toggle-row {
+      display: flex;
+      gap: 10px;
+      background: var(--paper);
+      border-radius: 10px;
+      padding: 6px;
+      margin-bottom: 14px;
+    }
+
+    .toggle-opt {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1.5px solid transparent;
+    }
+
+    .toggle-opt.active {
+      background: var(--white);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .total-box {
+      background: var(--teal-light);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 18px 0;
+    }
+
+    .total-box span {
+      font-size: 13px;
+      color: #4B655F;
+    }
+
+    .total-box b {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--teal);
+    }
+
+    .modal .btn-primary {
+      width: 100%;
+      justify-content: center;
+      padding: 14px;
+      font-size: 15.5px;
+    }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .success-msg.show {
+      display: block;
+    }
+
+    .success-msg .check {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px;
+    }
+
+    @media (max-width: 900px) {
+
+      .nav-links,
+      .nav-cta .btn-outline {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .search-card {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .steps,
+      .test-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats .wrap {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .search-card {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a href="#" class="logo">FURAB<span class="dash">RENTAL</span></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#armada">Daftar Mobil</a></li>
+          <li><a href="#cara-kerja">Cara Sewa</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a href="https://wa.me/6281234567890" class="btn btn-outline">Hubungi Kami</a>
+        <a href="#armada" class="btn btn-primary">Pesan Sekarang</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Sewa mobil,<br>jalan <em>kapan aja.</em></h1>
+      <p class="lede">Armada terawat, harga transparan, siap antar di kota kamu. Pilih lepas kunci atau pakai sopir —
+        booking dalam 2 menit.</p>
+      <div class="search-card">
+        <div class="search-field">
+          <label for="lokasi">Lokasi Ambil</label>
+          <select id="lokasi">
+            <option>Medan Kota</option>
+            <option>Bandara Kualanamu</option>
+            <option>Binjai</option>
+            <option>Deli Serdang</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label for="tgl-ambil">Tanggal Ambil</label>
+          <input type="date" id="tgl-ambil">
+        </div>
+        <div class="search-field">
+          <label for="tgl-kembali">Tanggal Kembali</label>
+          <input type="date" id="tgl-kembali">
+        </div>
+        <button class="btn btn-primary" id="btnCariMobil">Cari mobil</button>
+      </div>
+    </div>
+    <div class="road-line"></div>
+  </section>
+
+  <div class="stats">
+    <div class="wrap">
+      <div class="stat"><b>120+</b><span>Unit Tersedia</span></div>
+      <div class="stat"><b>4</b><span>Kota Layanan</span></div>
+      <div class="stat"><b>4.9</b><span>Rating Pelanggan</span></div>
+      <div class="stat"><b>24/7</b><span>Layanan Bantuan</span></div>
+    </div>
+  </div>
+
+  <section id="armada">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-tag">Armada</p>
+          <h2>Pilih mobil sesuai kebutuhan</h2>
+        </div>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="filter-pill active" data-filter="Semua">Semua</button>
+        <button class="filter-pill" data-filter="City Car">City Car</button>
+        <button class="filter-pill" data-filter="MPV">MPV</button>
+        <button class="filter-pill" data-filter="SUV">SUV</button>
+        <button class="filter-pill" data-filter="Premium">Premium</button>
+        <button class="filter-pill" data-filter="Elektrik">Elektrik</button>
+      </div>
+
+      <div class="fleet-grid" id="fleetGrid"></div>
+    </div>
+  </section>
+
+  <section id="cara-kerja" style="background:var(--paper-2);">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-tag">Cara Kerja</p>
+          <h2>Booking dalam 3 langkah</h2>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step-card">
+          <span class="step-plate">01</span>
+          <h3>Pilih & Booking</h3>
+          <p>Pilih mobil, tentukan tanggal, dan isi data diri lewat form booking. Estimasi harga langsung muncul.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-plate">02</span>
+          <h3>Konfirmasi & Bayar</h3>
+          <p>Admin menghubungi kamu via WhatsApp untuk konfirmasi unit dan metode pembayaran.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-plate">03</span>
+          <h3>Antar / Ambil Mobil</h3>
+          <p>Mobil diantar ke lokasimu atau ambil langsung di kantor kami, lengkap dengan cek unit bersama.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimoni">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-tag">Testimoni</p>
+          <h2>Kata mereka yang sudah jalan bareng kami</h2>
+        </div>
+      </div>
+      <div class="test-grid">
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>Proses booking cepat, mobil bersih dan wangi. Sopirnya juga ramah dan tau jalan pintas ke luar kota.</p>
+          <div class="test-name">Rian Pratama</div>
+          <div class="test-role">Sewa Innova — Medan ke Berastagi</div>
+        </div>
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>Sudah tiga kali sewa lepas kunci di sini, mobil selalu prima dan harga sesuai yang tertera di awal.</p>
+          <div class="test-name">Siti Aminah</div>
+          <div class="test-role">Sewa Avanza — Perjalanan Keluarga</div>
+        </div>
+        <div class="test-card">
+          <div class="stars">★★★★★</div>
+          <p>Butuh mobil mendadak buat jemput tamu di bandara, unit datang tepat waktu. Recommended banget.</p>
+          <div class="test-name">Dedi Kurniawan</div>
+          <div class="test-role">Sewa Alphard — Corporate Trip</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="background:var(--paper-2);">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-tag">FAQ</p>
+          <h2>Pertanyaan yang sering ditanyakan</h2>
+        </div>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>Apa saja syarat sewa mobil lepas kunci?</summary>
+          <p>KTP asli, SIM A aktif, dan jaminan berupa dokumen asli (KTP/KK/Ijazah) atau deposit sesuai kebijakan unit.
+          </p>
+        </details>
+        <details>
+          <summary>Apakah harga sudah termasuk BBM?</summary>
+          <p>Harga sewa belum termasuk BBM. Untuk paket dengan sopir, BBM dalam kota biasanya sudah termasuk — akan
+            dikonfirmasi admin saat booking.</p>
+        </details>
+        <details>
+          <summary>Bisa antar-jemput mobil?</summary>
+          <p>Bisa. Kami melayani antar-jemput unit ke alamat, bandara, atau stasiun dalam radius kota layanan.</p>
+        </details>
+        <details>
+          <summary>Bagaimana jika terjadi kerusakan selama sewa?</summary>
+          <p>Setiap unit terdaftar asuransi dasar. Kerusakan akibat kelalaian penyewa akan dikenakan biaya sesuai
+            kesepakatan awal.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Siap berangkat?</h2>
+      <p>Booking sekarang, mobil siap antar hari ini juga.</p>
+      <a href="#armada" class="btn btn-primary">Pesan Mobil Sekarang</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="logo" style="font-size:22px;">FURAB<span class="dash">RENTAL</span></a>
+          <p style="color:#7A7566;font-size:14px;max-width:32ch;margin-top:12px;">Jasa sewa mobil harian, mingguan, dan
+            bulanan — lepas kunci maupun dengan sopir.</p>
+        </div>
+        <div>
+          <h4>Layanan</h4>
+          <ul>
+            <li><a href="#armada">Sewa Lepas Kunci</a></li>
+            <li><a href="#armada">Sewa Dengan Sopir</a></li>
+            <li><a href="#armada">Sewa Bulanan</a></li>
+            <li><a href="#armada">Antar Jemput Bandara</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Perusahaan</h4>
+          <ul>
+            <li><a href="#cara-kerja">Cara Kerja</a></li>
+            <li><a href="#testimoni">Testimoni</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontak</h4>
+          <ul>
+            <li>WhatsApp: 0812-3456-7890</li>
+            <li>Email: halo@FURAB_RENTAL.id</li>
+            <li>Jl. Sisingamangaraja No. 88, Medan</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 LintasRental. Contoh kode untuk keperluan demo/pengembangan.</span>
+        <span>Dibuat dengan HTML, CSS, dan JavaScript murni.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+
+      <div id="formView">
+        <h3 id="modalCarName">Toyota Avanza</h3>
+        <p class="modal-car-sub" id="modalCarSub">Matic · 7 Kursi · Rp300.000/hari</p>
+
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="namaPenyewa">Nama Lengkap</label>
+              <input type="text" id="namaPenyewa" required placeholder="cth. Andi Wijaya">
+            </div>
+            <div class="form-group">
+              <label for="noHp">No. WhatsApp</label>
+              <input type="tel" id="noHp" required placeholder="0812xxxxxxx">
+            </div>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-opt active" data-mode="lepas">Lepas Kunci</div>
+            <div class="toggle-opt" data-mode="sopir">Dengan Sopir (+Rp150rb/hari)</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="modalTglAmbil">Tanggal Ambil</label>
+              <input type="date" id="modalTglAmbil" required>
+            </div>
+            <div class="form-group">
+              <label for="modalTglKembali">Tanggal Kembali</label>
+              <input type="date" id="modalTglKembali" required>
+            </div>
+          </div>
+
+          <div class="total-box">
+            <span id="totalLabel">Isi tanggal untuk lihat estimasi</span>
+            <b id="totalHarga">Rp0</b>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Konfirmasi Booking</button>
+        </form>
+      </div>
+
+      <div class="success-msg" id="successView">
+        <div class="check">✓</div>
+        <h3>Booking diterima!</h3>
+        <p style="color:#514C40;">Terima kasih. Data booking kamu sudah tersimpan. Admin kami akan menghubungi kamu
+          lewat WhatsApp untuk konfirmasi unit, atau lanjutkan ke pembayaran sekarang.</p>
+        <a href="#" id="linkLanjutBayar" class="btn btn-primary" style="margin-top:16px;">Lanjut ke Pembayaran</a>
+        <button class="btn btn-outline" id="btnTutupSukses" style="margin-top:10px;">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = '/api';
+    let cars = [];
+    const fmtRupiah = (n) => "Rp" + Number(n).toLocaleString("id-ID");
+    const fleetGrid = document.getElementById("fleetGrid");
+
+    async function loadFleet() {
+      try {
+        fleetGrid.innerHTML = '<p style="padding:20px;color:#7A7566;">Memuat daftar mobil...</p>';
+        const res = await fetch(`${API_BASE}/vehicles?type=Mobil&limit=100`);
+        const json = await res.json();
+        if (!res.ok || !json.success) throw new Error(json.message || 'Gagal memuat data');
+
+        cars = json.data.map(v => ({
+          id: v.id,
+          name: v.name,
+          category: v.category,
+          transmisi: v.transmission,
+          kursi: v.seats,
+          status: v.status,
+          harga: Number(v.price_per_day),
+          image: v.image_url || 'https://placehold.co/400x260/EDE7D8/14181F?text=' + encodeURIComponent(v.name),
+        }));
+        renderFleet("Semua");
+      } catch (err) {
+        console.error(err);
+        fleetGrid.innerHTML = '<p style="padding:20px;color:#b3261e;">Gagal memuat data kendaraan dari server. Pastikan backend berjalan.</p>';
+      }
+    }
+
+    function renderFleet(filter) {
+      const list = filter === "Semua" ? cars : cars.filter(c => c.category === filter);
+      if (list.length === 0) {
+        fleetGrid.innerHTML = '<p style="padding:20px;color:#7A7566;">Belum ada kendaraan untuk kategori ini.</p>';
+        return;
+      }
+      fleetGrid.innerHTML = list.map(c => `
+      <div class="car-card">
+        <div class="car-art">
+            <span class="car-type-tag">${c.category}</span>
+            <img src="${c.image}" alt="${c.name}" class="car-image"
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x260/EDE7D8/14181F?text=${encodeURIComponent(c.name)}';">
+        </div>
+        <div class="car-body">
+          <h3>${c.name}</h3>
+          <div class="plate-row">
+            <span class="plate">${(c.transmisi || '-').toUpperCase()}</span>
+            <span class="plate">${c.kursi} KURSI</span>
+            <span class="plate">${c.status === 'Tersedia' ? 'TERSEDIA' : c.status.toUpperCase()}</span>
+          </div>
+          <div class="car-footer">
+            <div class="price">
+              <b>${fmtRupiah(c.harga)}</b>
+              <span>per hari</span>
+            </div>
+            <button class="btn btn-primary btn-small" onclick="openBooking(${c.id})" ${c.status !== 'Tersedia' ? 'disabled' : ''}>
+              ${c.status === 'Tersedia' ? 'Pilih Mobil' : 'Tidak Tersedia'}
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+    }
+    loadFleet();
+
+    // ---------- Filters ----------
+    document.getElementById("filters").addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-pill");
+      if (!btn) return;
+      document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      renderFleet(btn.dataset.filter);
+    });
+
+    document.getElementById("btnCariMobil").addEventListener("click", () => {
+      document.getElementById("armada").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // ---------- Modal / Booking ----------
+    let selectedCar = null;
+    let mode = "lepas"; // lepas | sopir
+
+    const modalOverlay = document.getElementById("modalOverlay");
+    const formView = document.getElementById("formView");
+    const successView = document.getElementById("successView");
+
+    window.openBooking = function (carId) {
+      selectedCar = cars.find(c => c.id === carId);
+      document.getElementById("modalCarName").textContent = selectedCar.name;
+      document.getElementById("modalCarSub").textContent =
+        `${selectedCar.transmisi} · ${selectedCar.kursi} Kursi · ${fmtRupiah(selectedCar.harga)}/hari`;
+      formView.style.display = "block";
+      successView.classList.remove("show");
+      document.getElementById("bookingForm").reset();
+      document.querySelectorAll(".toggle-opt").forEach(t => t.classList.remove("active"));
+      document.querySelector('.toggle-opt[data-mode="lepas"]').classList.add("active");
+      mode = "lepas";
+      updateTotal();
+      modalOverlay.classList.add("open");
+    };
+
+    function closeModal() {
+      modalOverlay.classList.remove("open");
+    }
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+    document.getElementById("btnTutupSukses").addEventListener("click", closeModal);
+    modalOverlay.addEventListener("click", (e) => { if (e.target === modalOverlay) closeModal(); });
+
+    document.querySelectorAll(".toggle-opt").forEach(opt => {
+      opt.addEventListener("click", () => {
+        document.querySelectorAll(".toggle-opt").forEach(o => o.classList.remove("active"));
+        opt.classList.add("active");
+        mode = opt.dataset.mode;
+        updateTotal();
+      });
+    });
+
+    const tglAmbil = document.getElementById("modalTglAmbil");
+    const tglKembali = document.getElementById("modalTglKembali");
+    tglAmbil.addEventListener("change", updateTotal);
+    tglKembali.addEventListener("change", updateTotal);
+
+    function updateTotal() {
+      const totalLabel = document.getElementById("totalLabel");
+      const totalHarga = document.getElementById("totalHarga");
+      if (!selectedCar) return;
+
+      const d1 = new Date(tglAmbil.value);
+      const d2 = new Date(tglKembali.value);
+      let hari = Math.round((d2 - d1) / 86400000);
+
+      if (!tglAmbil.value || !tglKembali.value || isNaN(hari) || hari <= 0) {
+        totalLabel.textContent = "Isi tanggal untuk lihat estimasi";
+        totalHarga.textContent = "Rp0";
+        return;
+      }
+
+      const sopirFee = mode === "sopir" ? 150000 * hari : 0;
+      const total = (selectedCar.harga * hari) + sopirFee;
+
+      totalLabel.textContent = `Estimasi untuk ${hari} hari${mode === "sopir" ? " · dengan sopir" : " · lepas kunci"}`;
+      totalHarga.textContent = fmtRupiah(total);
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nama = document.getElementById("namaPenyewa").value.trim();
+      const hp = document.getElementById("noHp").value.trim();
+
+      if (!nama) { alert("Nama lengkap wajib diisi."); return; }
+      if (!/^(\+62|62|0)8[1-9][0-9]{6,10}$/.test(hp)) {
+        alert("Format No. WhatsApp tidak valid, contoh: 0812xxxxxxx");
+        return;
+      }
+      if (!tglAmbil.value || !tglKembali.value || new Date(tglKembali.value) <= new Date(tglAmbil.value)) {
+        alert("Mohon isi tanggal ambil dan kembali dengan benar.");
+        return;
+      }
+      if (!selectedCar) { alert("Kendaraan belum terpilih."); return; }
+
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Menyimpan...";
+
+      const payload = {
+        vehicleId: selectedCar.id,
+        customerName: nama,
+        customerPhone: hp,
+        startDate: tglAmbil.value,
+        endDate: tglKembali.value,
+        withDriver: mode === "sopir",
+      };
+
+      try {
+        // INI YANG SEBELUMNYA TIDAK ADA: request nyata ke backend supaya data
+        // benar-benar tersimpan di tabel `rentals` di MySQL.
+        const res = await fetch(`${API_BASE}/rentals`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const result = await res.json();
+
+        if (!res.ok || !result.success) {
+          const msg = result.errors ? result.errors.map(e => e.message).join(", ") : (result.message || "Gagal menyimpan booking.");
+          throw new Error(msg);
+        }
+
+        formView.style.display = "none";
+        successView.classList.add("show");
+        document.getElementById("linkLanjutBayar").href = `pembayaran.html?id=${result.data.id}`;
+      } catch (err) {
+        alert("Booking gagal: " + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Konfirmasi Booking";
+      }
+    });
+  </script>
+
+</body>
+
+</html>
