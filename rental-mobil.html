@@ -1186,8 +1186,9 @@ async function loadFleet() {
       throw new Error("Format response API tidak valid");
     }
 
-    cars = result.data;
-    renderFleet("Semua");
+  cars = result.data;
+  console.log(result.data);
+  renderFleet("Semua");
 
   } catch (err) {
     console.error(err);
