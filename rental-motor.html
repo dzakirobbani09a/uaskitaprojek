@@ -1210,12 +1210,10 @@ cars = json.data.map(v => ({
     name: v.name,
     category: v.category,
     transmisi: v.transmisi,
+    kursi: v.kursi,
     status: v.status,
     harga: Number(v.harga),
-    kursi: v.kursi,
     image: v.image
-      ? `https://dzakirobbani09a.github.io/uaskitaprojek/${v.image}`
-      : `https://placehold.co/400x260/EDE7D8/14181F?text=${encodeURIComponent(v.name)}`
 }));
         renderFleet("Semua");
       } catch (err) {
