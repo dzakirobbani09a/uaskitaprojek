@@ -1173,21 +1173,14 @@
     const fleetGrid = document.getElementById("fleetGrid");
 
     async function loadFleet() {
-  try {
-    const response = await fetch(`${API_BASE}/vehicles`);
-    const result = await response.json();
+  const response = await fetch(`${API_BASE}/vehicles`);
+  const result = await response.json();
 
-    console.log("API RESPONSE:", result);
+  const fleetData = result.data;
 
-    const fleetData =
-      Array.isArray(result) ? result :
-      Array.isArray(result.data) ? result.data :
-      Array.isArray(result.vehicles) ? result.vehicles :
-      null;
-
-    if (!fleetData) {
-      throw new Error("Format response API tidak dikenali");
-    }
+  cars = fleetData;
+  renderFleet("Semua");
+}
 
     cars = fleetData;
     renderFleet("Semua");
