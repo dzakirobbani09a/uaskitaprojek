@@ -1,298 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Riwayat</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riwayat Sewa</title>
+
 <link rel="stylesheet" href="style.css">
+
 <style>
-.list { max-width: 800px; margin: 40px auto; padding: 0 16px; }
-.item {
-    background: white;
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 14px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
+.list{
+    max-width:800px;
+    margin:40px auto;
+    padding:0 16px;
 }
-.item.is-new { animation: flash 1.6s ease; }
-@keyframes flash { 0% { background:#fff3cd; } 100% { background:white; } }
-.item h3 { margin: 0 0 4px; color: #003566; }
-.item p { margin: 2px 0; color: #555; font-size: 14px; }
-.status-pill {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 12.5px;
-    font-weight: 700;
+
+.item{
+    background:#fff;
+    border-radius:12px;
+    padding:18px 20px;
+    margin-bottom:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
 }
-.status-Menunggu { background: #fff3cd; color: #8a6300; }
-.status-Lunas { background: #d4edda; color: #1e7e34; }
-.status-Dibatalkan { background: #f8d7da; color: #a71d2a; }
-.status-Selesai { background: #d1ecf1; color: #0c5460; }
-.live-dot {
-    display: none;
-    align-items: center;
-    gap: 6px;
-    color: #ffd000;
-    font-size: 13px;
-    font-weight: 700;
+
+.item h3{
+    margin:0 0 6px;
+    color:#003566;
+}
+
+.item p{
+    margin:3px 0;
+    color:#555;
+    font-size:14px;
+}
+
+.status-pill{
+    display:inline-block;
+    padding:5px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status-Menunggu{
+    background:#fff3cd;
+    color:#8a6300;
+}
+
+.status-Lunas{
+    background:#d4edda;
+    color:#1e7e34;
+}
+
+.status-Dibatalkan{
+    background:#f8d7da;
+    color:#a71d2a;
+}
+
+.status-Selesai{
+    background:#d1ecf1;
+    color:#0c5460;
+}
+
+.live-dot{
+    display:none;
+    color:#ffd000;
+    font-weight:bold;
 }
 </style>
+
 </head>
 <body>
 
-<header style="height:auto;background:#003566;padding:20px 0;">
-<div style="display:flex;justify-content:space-between;align-items:center;max-width:800px;margin:0 auto;padding:0 16px;">
-    <h1 style="color:white;font-size:26px;">Riwayat Sewa</h1>
-    <div style="display:flex;gap:16px;align-items:center;">
-        <span class="live-dot" id="liveDot">● Live</span>
-        <nav>
-            <a href="index.html" style="color:white;margin-right:16px;">Home</a>
-            <a href="tentangkami.html" style="color:white;margin-right:16px;">Tentang Kami</a>
-            <span id="authSlot" style="color:white;"></span>
-        </nav>
-    </div>
+<header style="background:#003566;padding:20px;">
+<div style="max-width:900px;margin:auto;display:flex;justify-content:space-between;align-items:center;">
+
+<h1 style="color:white;margin:0;">Riwayat Sewa</h1>
+
+<div>
+
+<span id="liveDot" class="live-dot">● Live</span>
+
+<a href="index.html" style="color:white;margin-left:20px;">Home</a>
+
+</div>
+
 </div>
 </header>
 
-<section class="list" id="data"><p style="text-align:center;">Memuat data...</p></section>
+<section id="data" class="list">
+<p style="text-align:center;">Memuat data...</p>
+</section>
 
 <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 <script src="js/auth.js"></script>
+
 <script>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Riwayat</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-<style>
-.list { max-width: 800px; margin: 40px auto; padding: 0 16px; }
-.item {
-    background: white;
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 14px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-.item.is-new { animation: flash 1.6s ease; }
-@keyframes flash { 0% { background:#fff3cd; } 100% { background:white; } }
-.item h3 { margin: 0 0 4px; color: #003566; }
-.item p { margin: 2px 0; color: #555; font-size: 14px; }
-.status-pill {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 12.5px;
-    font-weight: 700;
-}
-.status-Menunggu { background: #fff3cd; color: #8a6300; }
-.status-Lunas { background: #d4edda; color: #1e7e34; }
-.status-Dibatalkan { background: #f8d7da; color: #a71d2a; }
-.status-Selesai { background: #d1ecf1; color: #0c5460; }
-.live-dot {
-    display: none;
-    align-items: center;
-    gap: 6px;
-    color: #ffd000;
-    font-size: 13px;
-    font-weight: 700;
-}
-</style>
-</head>
-<body>
 
-<header style="height:auto;background:#003566;padding:20px 0;">
-<div style="display:flex;justify-content:space-between;align-items:center;max-width:800px;margin:0 auto;padding:0 16px;">
-    <h1 style="color:white;font-size:26px;">Riwayat Sewa</h1>
-    <div style="display:flex;gap:16px;align-items:center;">
-        <span class="live-dot" id="liveDot">● Live</span>
-        <nav>
-            <a href="index.html" style="color:white;margin-right:16px;">Home</a>
-            <a href="tentangkami.html" style="color:white;margin-right:16px;">Tentang Kami</a>
-            <span id="authSlot" style="color:white;"></span>
-        </nav>
-    </div>
-</div>
-</header>
+const API_BASE = "https://uaskitaprojek-backend-production.up.railway.app/api";
+const SOCKET_URL = "https://uaskitaprojek-backend-production.up.railway.app";
 
-<section class="list" id="data"><p style="text-align:center;">Memuat data...</p></section>
-
-<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-<script src="js/auth.js"></script>
-<script>
-const API_BASE = 'https://uaskitaprojek-backend-production.up.railway.app/api';
-
-function fmtTanggal(d) {
-    return d ? String(d).slice(0, 10) : '-';
+function fmtTanggal(d){
+    if(!d) return "-";
+    return String(d).slice(0,10);
 }
 
-async function load(highlightId) {
-    try {
+async function load(highlightId){
+
+    try{
+
         const res = await fetch(`${API_BASE}/rentals?limit=100`);
         const json = await res.json();
-        if (!res.ok || !json.success) throw new Error(json.message || 'Gagal memuat data.');
 
-        const data = json.data || [];
-        let html = "";
+        if(!json.success){
+            throw new Error(json.message);
+        }
 
-        if (data.length === 0) {
-            html = "<p style='text-align:center;'>Belum ada riwayat sewa.</p>";
-        } else {
-            data.forEach(r => {
-                html += `
-                <div class="item ${r.id === highlightId ? 'is-new' : ''}">
-                    <div>
-                        <h3>${(r.vehicle && r.vehicle.name) || '-'}</h3>
-                        <p>${r.customer_name || '-'} · ${r.customer_phone || '-'}</p>
-                        <p>${fmtTanggal(r.start_date)} &rarr; ${fmtTanggal(r.end_date)}</p>
-                    </div>
-                    <div style="text-align:right;">
-                        <p><span class="status-pill status-${r.status}">${r.status}</span></p>
-                        <p style="font-weight:700;color:#003566;">Rp${Number(r.total_price).toLocaleString('id-ID')}</p>
-                        ${Auth.hasRole('admin') ? `
-                        <button onclick="hapus(${r.id})" style="margin-top:6px;background:#c0392b;color:white;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;">
-                            Batalkan
-                        </button>` : ''}
-                    </div>
+        let html="";
+
+        json.data.forEach(r=>{
+
+            html+=`
+
+            <div class="item">
+
+                <div>
+
+                    <h3>${r.vehicle ? r.vehicle.name : "-"}</h3>
+
+                    <p>${r.customer_name}</p>
+
+                    <p>${r.customer_phone}</p>
+
+                    <p>${fmtTanggal(r.start_date)} → ${fmtTanggal(r.end_date)}</p>
+
                 </div>
-                `;
-            });
-        }
 
-        document.getElementById("data").innerHTML = html;
-    } catch (err) {
-        console.error("ERROR LOAD:", err);
-        document.getElementById("data").innerHTML =
-            "<p style='text-align:center;'>Gagal memuat data. Cek apakah backend berjalan.</p>";
-    }
-}
+                <div style="text-align:right">
 
-async function hapus(id) {
-    if (!confirm("Yakin ingin membatalkan pesanan ini?")) return;
-    try {
-        const res = await fetch(`${API_BASE}/rentals/${id}`, {
-            method: 'DELETE',
-            headers: { ...Auth.authHeader() },
+                    <span class="status-pill status-${r.status}">
+                    ${r.status}
+                    </span>
+
+                    <p style="font-weight:bold;color:#003566;">
+                    Rp${Number(r.total_price).toLocaleString("id-ID")}
+                    </p>
+
+                    ${
+                    Auth.hasRole("admin")
+                    ?
+
+                    `<button onclick="hapus(${r.id})"
+                    style="background:#c0392b;color:white;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;">
+                    Batalkan
+                    </button>`
+
+                    :
+
+                    ""
+
+                    }
+
+                </div>
+
+            </div>
+
+            `;
+
         });
-        const json = await res.json();
-        if (res.ok && json.success) {
-            load();
-        } else {
-            alert("Gagal membatalkan: " + (json.message || ''));
+
+        if(json.data.length===0){
+            html="<p style='text-align:center'>Belum ada riwayat.</p>";
         }
-    } catch (err) {
-        console.error("ERROR DELETE:", err);
-        alert("Terjadi kesalahan saat menghapus");
+
+        document.getElementById("data").innerHTML=html;
+
     }
+
+    catch(err){
+
+        console.error(err);
+
+        document.getElementById("data").innerHTML=
+        "<p style='text-align:center'>Gagal mengambil data.</p>";
+
+    }
+
 }
 
-// ---------- Real-time lewat Socket.io ----------
-// backend/controllers/rentalController.js sudah emit 'newRental' / 'rentalUpdated'
-// / 'rentalDeleted' -- halaman ini sekarang benar-benar mendengarkannya supaya
-// daftar riwayat ter-update otomatis tanpa perlu refresh manual.
-const socket = io('https://uaskitaprojek-backend-production.up.railway.app');
-socket.on('connect', () => {
-    document.getElementById('liveDot').style.display = 'inline-flex';
+async function hapus(id){
+
+    if(!confirm("Batalkan pesanan?")) return;
+
+    const res=await fetch(`${API_BASE}/rentals/${id}`,{
+
+        method:"DELETE",
+
+        headers:{
+            ...Auth.authHeader()
+        }
+
+    });
+
+    const json=await res.json();
+
+    if(json.success){
+
+        load();
+
+    }else{
+
+        alert(json.message);
+
+    }
+
+}
+
+/* ===========================
+   SOCKET.IO
+=========================== */
+
+const socket=io(SOCKET_URL);
+
+socket.on("connect",()=>{
+
+    console.log("Socket Connected");
+
+    document.getElementById("liveDot").style.display="inline";
+
 });
-socket.on('newRental', (rental) => load(rental.id));
-socket.on('rentalUpdated', () => load());
-socket.on('rentalDeleted', () => load());
+
+socket.on("newRental",()=>load());
+
+socket.on("rentalUpdated",()=>load());
+
+socket.on("rentalDeleted",()=>load());
 
 load();
-</script>
 
-</body>
-</html>
-
-function fmtTanggal(d) {
-    return d ? String(d).slice(0, 10) : '-';
-}
-
-async function load(highlightId) {
-    try {
-        const res = await fetch(`${API_BASE}/rentals?limit=100`);
-        const json = await res.json();
-        if (!res.ok || !json.success) throw new Error(json.message || 'Gagal memuat data.');
-
-        const data = json.data || [];
-        let html = "";
-
-        if (data.length === 0) {
-            html = "<p style='text-align:center;'>Belum ada riwayat sewa.</p>";
-        } else {
-            data.forEach(r => {
-                html += `
-                <div class="item ${r.id === highlightId ? 'is-new' : ''}">
-                    <div>
-                        <h3>${(r.vehicle && r.vehicle.name) || '-'}</h3>
-                        <p>${r.customer_name || '-'} · ${r.customer_phone || '-'}</p>
-                        <p>${fmtTanggal(r.start_date)} &rarr; ${fmtTanggal(r.end_date)}</p>
-                    </div>
-                    <div style="text-align:right;">
-                        <p><span class="status-pill status-${r.status}">${r.status}</span></p>
-                        <p style="font-weight:700;color:#003566;">Rp${Number(r.total_price).toLocaleString('id-ID')}</p>
-                        ${Auth.hasRole('admin') ? `
-                        <button onclick="hapus(${r.id})" style="margin-top:6px;background:#c0392b;color:white;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;">
-                            Batalkan
-                        </button>` : ''}
-                    </div>
-                </div>
-                `;
-            });
-        }
-
-        document.getElementById("data").innerHTML = html;
-    } catch (err) {
-        console.error("ERROR LOAD:", err);
-        document.getElementById("data").innerHTML =
-            "<p style='text-align:center;'>Gagal memuat data. Cek apakah backend berjalan.</p>";
-    }
-}
-
-async function hapus(id) {
-    if (!confirm("Yakin ingin membatalkan pesanan ini?")) return;
-    try {
-        const res = await fetch(`${API_BASE}/rentals/${id}`, {
-            method: 'DELETE',
-            headers: { ...Auth.authHeader() },
-        });
-        const json = await res.json();
-        if (res.ok && json.success) {
-            load();
-        } else {
-            alert("Gagal membatalkan: " + (json.message || ''));
-        }
-    } catch (err) {
-        console.error("ERROR DELETE:", err);
-        alert("Terjadi kesalahan saat menghapus");
-    }
-}
-
-// ---------- Real-time lewat Socket.io ----------
-// backend/controllers/rentalController.js sudah emit 'newRental' / 'rentalUpdated'
-// / 'rentalDeleted' -- halaman ini sekarang benar-benar mendengarkannya supaya
-// daftar riwayat ter-update otomatis tanpa perlu refresh manual.
-const socket = io();
-socket.on('connect', () => {
-    document.getElementById('liveDot').style.display = 'inline-flex';
-});
-socket.on('newRental', (rental) => load(rental.id));
-socket.on('rentalUpdated', () => load());
-socket.on('rentalDeleted', () => load());
-
-load();
 </script>
 
 </body>
